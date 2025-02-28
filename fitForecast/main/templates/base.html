@@ -8,15 +8,19 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
 
 </head>
 <body>
     <!-- Top Bar (Title) -->
     <header class="top-bar">
+        <span class="material-symbols-outlined">
+            menu
+        </span>
         <h1>
             <span class="first-three">Fit</span><span class="rest-of-text">Forecast</span>
-            
         </h1>
+        <img src="{% static 'images/profile-pic.png'%}"" alt="Profile" class="circle-img">
     </header>
     
 
@@ -43,5 +47,8 @@
 <footer>
     <p>footer placeholder</p>
 </footer>
+
+<script src="{% static 'js/select-pill.js' %}"></script>
+
 </body>
 </html>

@@ -20,3 +20,6 @@ media/
 .vscode/
 *.log
 .DS_Store
+
+# Ignore sensitive data
+.env

@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Top Bar */
@@ -12,7 +13,7 @@
     color: black;
     text-align: center;
     padding: 15px;
-    font-size: 1rem;
+    font-size: .65rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -66,14 +67,20 @@
     display: inline-block;
     background-color: #555;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 20px;
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: 300;
     cursor: pointer;
+    opacity: 0.3;
     user-select: none;
     transition: background 0.3s ease-in-out;
+}
+
+/* When a pill is selected */
+.sport.selected {
+    opacity: 1;  /* 100% opacity (fully visible) */
 }
 
 .sport:hover {
@@ -87,4 +94,32 @@
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* User Image */
+.circle-img {
+    position:absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* Set width */
+    height: 30px; /* Set height */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensures the image fills the circle without distortion */
+
+}
+
+/* Menu Icon*/
+.material-symbols-outlined {
+    position:absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-40%);
+    width: 30px; /* Set width */
+    height: 30px; /* Set height */
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 24
 }
