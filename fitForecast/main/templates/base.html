@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitForecast</title>
+    <title>{% block title %}FitForecast{% endblock %}</title>
 
     {% load static %}
-
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <header>
-        <h1>FitForecast</h1>
+    <!-- Top Bar (Title) -->
+    <header class="top-bar">
+        <h1>
+            <span class="first-three">Fit</span><span class="rest-of-text">Forecast</span>
+            
+        </h1>
     </header>
+    
 
-    <div>
+    <!-- Scrollable Sports Bar -->
+    <div class="sports-bar">
+        <div class="sports-container">
+            <span class="sport">Running</span>
+            <span class="sport">Cycling</span>
+            <span class="sport">Swimming</span>
+            <span class="sport">Yoga</span>
+            <span class="sport">Weightlifting</span>
+            <span class="sport">Tennis</span>
+            <span class="sport">Football</span>
+            <span class="sport">Basketball</span>
+            <span class="sport">Rowing</span>
+            <span class="sport">Hiking</span>
+        </div>
+    </div>
+
+    <div class="content">
         {% block content %}{% endblock %}
     </div>
 
-    <footer>
-        <p>footer placeholder</p>
-    </footer>
+<footer>
+    <p>footer placeholder</p>
+</footer>
 </body>
 </html>
