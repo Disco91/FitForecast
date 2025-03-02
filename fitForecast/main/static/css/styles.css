@@ -64,27 +64,28 @@
 
 /* Individual sport pills */
 .sport {
+    border: 2px solid lightgrey;
     display: inline-block;
-    background-color: #555;
-    color: white;
+    background-color: green;
+    color: black;
     padding: 5px 10px;
     border-radius: 20px;
     font-family: 'Inter', sans-serif;
     font-size: .9rem;
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer;
-    opacity: 0.3;
     user-select: none;
     transition: background 0.3s ease-in-out;
 }
 
 /* When a pill is selected */
 .sport.selected {
-    opacity: 1;  /* 100% opacity (fully visible) */
+    color: white;
+    border: 2px solid white
 }
 
 .sport:hover {
-    background-color: #777;
+    opacity: .6;
 }
 
 /* Main Content */
