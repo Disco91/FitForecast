@@ -123,3 +123,34 @@
     'GRAD' 0,
     'opsz' 24
 }
+
+.tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+}
+
+.tile {
+    background-color: #ffffff !important;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for swipe and opacity */
+    cursor: pointer;
+}
+
+/* When a tile is swiped to be removed */
+.tile.swiped {
+    transform: translateX(100%); /* Move tile out of the container */
+    opacity: 0; /* Fade out the tile */
+}
+
+/* Add styles for dragging */
+.tile.dragging {
+    opacity: 0.5;  /* Makes tile semi-transparent while dragging */
+}

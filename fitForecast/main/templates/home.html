@@ -3,12 +3,13 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-    <h2>Welcome to FitForecast</h2>
-    <p>This is the home page content.</p>
+    <body>
 
-    <h1>Weather App</h1>
-    <input type="text" id="city" placeholder="Enter city" />
-    <button onclick="fetchWeather()">Get Weather</button>
-    <div id="weather-info"></div>
+        <button id="addTile">Add Tile</button>
+        <div class="tile-container" id="tileContainer">
+            <!-- Tiles will be added here -->
+        </div>
+    
+    </body>
 
 {% endblock %}
