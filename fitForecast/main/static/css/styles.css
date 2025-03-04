@@ -24,12 +24,12 @@
     z-index: 1000;
 }
 
-/* Style the first three letters */
+/* Style the first three letters of fitforecast */
 .first-three {
     font-weight: 600; /* Regular weight */
 }
 
-/* Style the rest of the text (extra light) */
+/* Style the rest of fitforecast (extra light) */
 .rest-of-text {
     font-weight: 100; /* Extra Light weight */
 }
@@ -64,7 +64,7 @@
 
 /* Individual sport pills */
 .sport {
-    border: 2px solid lightgrey;
+    outline: 2px solid lightgrey;
     display: inline-block;
     background-color: green;
     color: black;
@@ -76,12 +76,15 @@
     cursor: pointer;
     user-select: none;
     transition: background 0.3s ease-in-out;
+    opacity: 0.7;
 }
 
 /* When a pill is selected */
 .sport.selected {
     color: white;
-    border: 2px solid white
+    outline: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    opacity: 1;
 }
 
 .sport:hover {
@@ -143,6 +146,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 6px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for swipe and opacity */
     cursor: pointer;
+    user-select: none;
 }
 
 /* When a tile is swiped to be removed */
@@ -154,4 +158,109 @@
 /* Add styles for dragging */
 .tile.dragging {
     opacity: 0.5;  /* Makes tile semi-transparent while dragging */
+}
+
+/* Style the add-tile button */
+.add-tile-button {
+    display: flex;
+    justify-content: center;   /* Centers the icon horizontally */
+    align-items: center;       /* Centers the icon vertically */
+    width: 65px;               /* Adjust size */
+    height: 65px;              /* Make it a perfect circle */
+    background-color: white;   /* Button color */
+    border: none;
+    border-radius: 50%;        /* Makes it circular */
+    font-size: 30px;           /* Size of the icon */
+    color: black;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background 0.3s ease-in-out;
+    position: relative;        /* Keeps the button inside the container */
+    margin-top: 10px;          /* Space between tiles and button */
+}
+
+/* Ensure the Material icon is properly centered */
+.add-tile-button .material-symbols-outlined {
+    font-size: 45px;           /* Adjust the icon size if necessary */
+    display: inline-block;     /* Ensures the icon is treated as an inline element */
+    transform: translateY(-22px); 
+}
+
+/* Hover effect */
+.add-tile-button:hover {
+    background-color: lightgrey; /* Darker shade on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Ensure the button stays below the tiles */
+.tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center; /* Centers tiles horizontally */
+}
+
+/* Adjust the button to be centered below tiles */
+#addTile {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Inter", sans-serif;  /* Adjust font if needed */
+}
+
+.smart-index-container {
+    display: flex;
+    flex-direction: column;  /* Stack the elements vertically */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Add space between elements */
+    padding: 20px;
+    background-color: #ffffff !important;
+    border-radius: 12px;
+    width: 250px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 6px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    position: relative;  /* To allow absolute positioning of child elements */
+}
+
+/* Progress Bar */
+[role="progressbar"] {
+    --percentage: var(--value);
+    --primary: green;
+    --secondary: lightgrey;
+    --size: 200px;
+    animation: progress 2s 0.5s forwards;
+    width: var(--size);
+    aspect-ratio: 2 / 1;
+    border-radius: 50% / 100% 100% 0 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* Progress Bar Before Element */
+[role="progressbar"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 0.75turn at 50% 100%, var(--primary) calc(var(--percentage) * 1% / 2), var(--secondary) calc(var(--percentage) * 1% / 2 + 0.1%));
+    mask: radial-gradient(at 50% 100%, white 50%, transparent 50.5%);
+    -webkit-mask: radial-gradient(at 50% 100%, #0000 50%, #000 50.5%);
+}
+
+/* Progress Bar After Element */
+[role="progressbar"]::after {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '';
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--primary);
 }

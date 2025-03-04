@@ -11,17 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function createTile(content = "New Tile") {
         const tile = document.createElement("div");
         tile.classList.add("tile");
-        tile.innerHTML = `
-            <button class="delete-btn">X</button>
-            <p>${content}</p>
-        `;
+        tile.innerHTML = `<p>${content}</p>`; // Removed button
 
-        // Delete functionality
-        tile.querySelector(".delete-btn").addEventListener("click", function () {
-            tile.remove();
-        });
-
-        // Swipe functionality (for touch and mouse)
+        // SWIPE FUNCTIONALITY (FOR TOUCH AND MOUSE)
         let startX = 0;
         let endX = 0;
 
@@ -35,11 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         tile.addEventListener("touchend", function () {
-            if (endX - startX > 100) {
-                // Swipe right detected, add 'swiped' class to start the animation
+            if (endX - startX > 100) { // Swipe right detected
                 tile.classList.add("swiped");
-
-                // Wait for the animation to end, then remove the tile from the DOM
                 tile.addEventListener('transitionend', function () {
                     tile.remove();
                 });
@@ -62,11 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         tile.addEventListener("mouseup", function () {
-            if (isMouseDown && mouseEndX - mouseStartX > 100) {
-                // Swipe right detected on mouse drag
+            if (isMouseDown && mouseEndX - mouseStartX > 100) { // Swipe right detected
                 tile.classList.add("swiped");
-
-                // Wait for the animation to end, then remove the tile from the DOM
                 tile.addEventListener('transitionend', function () {
                     tile.remove();
                 });
@@ -74,9 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
             isMouseDown = false;
         });
 
-        container.appendChild(tile);
+        container.appendChild(tile); // Append the tile to the container
     }
 
+    // ADD TILE BUTTON FUNCTIONALITY
     addTileBtn.addEventListener("click", function () {
         createTile(`Tile ${container.children.length + 1}`);
     });

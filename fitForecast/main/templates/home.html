@@ -3,13 +3,23 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
+    
     <body>
+        <div class="smart-index-container" id="smart-index-container">
+            <p>Smart Index</p>
+            <div role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="--value: 83"></div>
+            <p>Great Day!</p>
+        </div>
 
-        <button id="addTile">Add Tile</button>
+        
         <div class="tile-container" id="tileContainer">
             <!-- Tiles will be added here -->
         </div>
-    
+
+        <button class="add-tile-button" id="addTile">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+        
     </body>
 
 {% endblock %}
