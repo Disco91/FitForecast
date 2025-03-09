@@ -19,7 +19,26 @@ function animateGauge(value) {
     grey_path.style.strokeDashoffset = (length * (1 - value / 100)) - length - 5;
 }   
 
+function retrieveColor(index) {
+    if (index <= 25) {
+        return "red";
+    } else if (index <= 40) {
+        return "orange";
+    } else if (index <= 60) {
+        return "yellow";
+    } else if (index <= 0) {
+        return "#32CD32"; // lime green
+    } else {
+        return "green";
+    }
+}
+
 // Ensure the path starts hidden when page loads
-document.addEventListener("DOMContentLoaded", function() {
-    animateGauge(75);
+document.addEventListener("WeatherDataUpdated", function(event) {
+    
+    let value = document.getElementById("result").textContent;
+
+    document.getElementById("gauge-fill").setAttribute("stroke", retrieveColor(value));
+
+    animateGauge(value);
 });

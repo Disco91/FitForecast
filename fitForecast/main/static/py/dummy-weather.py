@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from django.http import JsonResponse
 import random
+from django.http import JsonResponse
 
-def home(request):
-    return render(request, 'home.html')
+# Chatgpt was used to understand how to create django Json responses
 
 def generate_weather():
     temperature = random.randint(-30,50)
