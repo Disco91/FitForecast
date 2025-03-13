@@ -144,7 +144,7 @@
     position: relative;
     font-family: "Inter", sans-serif;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 6px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for swipe and opacity */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smoot` transition for swipe and opacity */
     cursor: pointer;
     user-select: none;
 }
@@ -177,7 +177,7 @@
     transition: transform 0.2s ease, background 0.3s ease-in-out;
     position: relative;        /* Keeps the button inside the container */
     margin-top: 10px;          /* Space between tiles and button */
-}
+} /* chatgpt used to find lists of styles to apply */
 
 /* Ensure the Material icon is properly centered */
 .add-tile-button .material-symbols-outlined {
@@ -237,4 +237,35 @@
     font-weight: 600;
     height: 0px;
     transform: translateY(-4rem);
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 10px; /* Gap between grid items */
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center;     /* Vertically center the content */
+    height: 100px;           /* Adjust the height to fit your content */
+    text-align: center;      /* Center text inside the grid item */
+    background-color: #f0f0f0; /* Example background */
+}
+
+.text-content {
+    margin: 0;
+    font-size: 2rem;  /* Adjust font size as needed */
+    font-weight: 500;   /* Adjust font weight */
+    text-align: center; /* Center the text */
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;    /* Vertically center */
+    height: 100%;           /* Fill the cell */
+}
+
+.tile img {
+    max-width: 50%;     /* Limit the image width to the width of the grid cell */
+    max-height: 50%;    /* Limit the image height to the height of the grid cell */
+    object-fit: cover;   /* Ensure the image fills the grid cell without distortion */
 }

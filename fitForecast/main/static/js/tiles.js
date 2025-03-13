@@ -7,17 +7,39 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Tile container or add tile button not found!");
         return;
     }
-
-    function createTile(content = "New Tile") {
+        
+    // create each tile from json data
+    function createTile(tileData) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
-        tile.innerHTML = `<p>${content}</p>`; // Removed button
+        
+        // Setup Grid
+        tile.style.display = "grid";
+        tile.style.gridTemplateRows = `repeat(${tileData.rows}, 1fr)`; // Use backticks for template literals
+        tile.style.gridTemplateColumns = `repeat(${tileData.cols}, 1fr)`; // Use backticks for template literals
+        
+        // Fill grid with Tile Data
+        tileData.content.forEach(item => {
+            let element;
+            if (item.type === "text") {
+                element = document.createElement("div");
+                element.classList.add("text-content");
+                element.textContent = item.value;
+            } else if (item.type === "image") {
+                element = document.createElement("img");
+                element.src = item.src;
+            }
+
+            tile.appendChild(element);
+        });
+
+        container.appendChild(tile);
 
         // SWIPE FUNCTIONALITY (FOR TOUCH AND MOUSE)
         let startX = 0;
         let endX = 0;
 
-        // For mobile devices (touch events)
+        // For phones (touch)
         tile.addEventListener("touchstart", function (e) {
             startX = e.changedTouches[0].screenX;
         });
@@ -35,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // For desktop devices (mouse events)
+        // For computers (mouse)
         let mouseStartX = 0;
         let mouseEndX = 0;
         let isMouseDown = false;
@@ -64,11 +86,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ADD TILE BUTTON FUNCTIONALITY
-    addTileBtn.addEventListener("click", function () {
-        createTile(`Tile ${container.children.length + 1}`);
-    });
+    //addTileBtn.addEventListener("click", function () {
+    //    createTile(`Tile ${container.children.length + 1}`);
+    //});
 
     // Example initial tiles
-    createTile("Tile 1");
-    createTile("Tile 2");
+    // createTile("Tile 1");
+    // createTile("Tile 2");
+
+    // collect weather data
+    document.addEventListener("WeatherDataUpdatedTiles", function(event) {
+        const weatherData = event.detail;
+
+        createTile({
+            rows: 2,
+            cols: 2,
+            content: [
+                { type: "text", value: `${weatherData.temperature}°C`},
+                { type: "image", src: "/static/images/profile-pic.png" },
+                { type: "text", value: `${weatherData.wind}kph` },
+                { type: "text", value: `UV:${weatherData.uv}` }
+            ]
+        });
+    });
 });

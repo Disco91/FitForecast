@@ -26,7 +26,7 @@ function retrieveColor(index) {
         return "orange";
     } else if (index <= 60) {
         return "yellow";
-    } else if (index <= 0) {
+    } else if (index <= 80) {
         return "#32CD32"; // lime green
     } else {
         return "green";

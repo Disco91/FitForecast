@@ -19,6 +19,10 @@ function fetchWeatherData() {
             // after index is updated activate the smart index script.
             const event = new CustomEvent("WeatherDataUpdated",{ detail: {result: result}});
             document.dispatchEvent(event)
+
+            // prepare data to tiles.js
+            const eventTiles = new CustomEvent("WeatherDataUpdatedTiles",{ detail: { temperature, wind, uv, result }});
+            document.dispatchEvent(eventTiles)
 })};
 
 // function to linearly score the value from 0 - 1
@@ -55,7 +59,24 @@ function walk_index(temperature, wind, uv) {
     let wind_score = 1 - normalize(wind, wind_range); // Less wind is better
     let uv_score = 1 - normalize(uv, uv_range);       // Lower UV is better
     
-    let index = ((temp_score + wind_score + uv_score) / 3) * 100;
+    let modifier = 0;
+
+    modifier += (wind - 30); // every kph above 30 lowers score
+    modifier += (uv - 5 * 2); // every uv above 5 lowers score by 2* per UV.
+    
+    if (temperature < 30) {
+        modifier += (temperature - 30)
+    } else if (temperature > 0) {
+        modifier += (-temperature)
+    }
+
+    let index = (((temp_score + wind_score + uv_score) / 3) * 100 ) - modifier;
+
+    //if (index < 0) {
+    //    index = 0;
+    //} else if (index > 100) {
+    //    index = 100;
+    //}
 
     return Math.round(index);
 }
