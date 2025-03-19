@@ -28,8 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (item.type === "image") {
                 element = document.createElement("img");
                 element.src = item.src;
+            } else if (item.type === "chart") {
+                element = document.createElement("div");
+                element.id = item.id;
+                element.style.width = "100%";
+                element.style.height = "100%";
+            } else if (item.type === "icon") {
+                element = document.createElement("div"); // Create an <i> element for the icon
+                element.classList.add("material-symbols-outlined", "grid-icon"); // Add the Material Icons class
+                element.textContent = item.value; // Set the icon's name (e.g., "home", "star")
             }
-
             tile.appendChild(element);
         });
 
@@ -98,15 +106,37 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("WeatherDataUpdatedTiles", function(event) {
         const weatherData = event.detail;
 
+        console.log("weather Icon: ",weatherData.condition);
+
         createTile({
             rows: 2,
             cols: 2,
             content: [
                 { type: "text", value: `${weatherData.temperature}°C`},
-                { type: "image", src: "/static/images/profile-pic.png" },
+                //{ type: "image", src: "/static/images/profile-pic.png" },
+                { type: "icon", value: `${weatherData.condition}` },
                 { type: "text", value: `${weatherData.wind}kph` },
-                { type: "text", value: `UV:${weatherData.uv}` }
+                { type: "text", value: `UV ${weatherData.uv}` }
             ]
         });
-    });
+
+        createTile({
+            rows: 1,
+            cols: 2,
+            content: [
+                { type: "text", value: `${weatherData.temperature}°C`},
+                { type: "chart", id: "chart_div" },
+            ]
+        });
+
+        // Load the chart script and render the chart after tiles are created
+        const script = document.createElement("script");
+        script.src = "/static/js/temp-chart.js";
+        script.onload = function() {
+            google.charts.setOnLoadCallback(function () {
+                drawChart("chart_div"); // Pass the ID of the div where the chart will be drawn
+            });
+        };
+        document.body.appendChild(script);
+});
 });
