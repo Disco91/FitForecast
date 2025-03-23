@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectPill = (pill) => {
         sportsPills.forEach(p => p.classList.remove('selected')); // Remove 'selected' class from all pills
         pill.classList.add('selected'); // Add 'selected' class to the clicked pill
+        
+        const sport = pill.textContent;
+        localStorage.setItem("selectedSport", sport)
     };
 
     // Add event listener to each pill

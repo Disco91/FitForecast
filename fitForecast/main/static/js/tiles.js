@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("tileContainer");
     const addTileBtn = document.getElementById("addTile");
 
+
     // Check if elements exist to prevent errors
     if (!container || !addTileBtn) {
         console.error("Tile container or add tile button not found!");
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
     // create each tile from json data
     function createTile(tileData) {
+        console.log("Creating tile:", tileData); 
         const tile = document.createElement("div");
         tile.classList.add("tile");
         
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tile.appendChild(element);
         });
 
-        container.appendChild(tile);
+        // container.appendChild(tile);
 
         // SWIPE FUNCTIONALITY (FOR TOUCH AND MOUSE)
         let startX = 0;
@@ -102,33 +104,70 @@ document.addEventListener("DOMContentLoaded", function () {
     // createTile("Tile 1");
     // createTile("Tile 2");
 
+
+
     // collect weather data
+    let weatherData = {};
+
     document.addEventListener("WeatherDataUpdatedTiles", function(event) {
-        const weatherData = event.detail;
+        console.log("WeatherDataUpdatedTiles event triggered!");
+        weatherData = event.detail;
+        console.log("Weather data received:", weatherData); // Log weather data
+    });
 
-        console.log("weather Icon: ",weatherData.condition);
+    function clearTiles() {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+    
+    const sportsPills = document.querySelectorAll('.sport');
+    sportsPills.forEach(pill => {
+        pill.addEventListener("click", function() {
+            // update selected sport after clicking pill
+            const selectedSport = localStorage.getItem("selectedSport"); // collect active sport selected from select-pill.js.
 
-        createTile({
-            rows: 2,
-            cols: 2,
-            content: [
-                { type: "text", value: `${weatherData.temperature}°C`},
-                //{ type: "image", src: "/static/images/profile-pic.png" },
-                { type: "icon", value: `${weatherData.condition}` },
-                { type: "text", value: `${weatherData.wind}kph` },
-                { type: "text", value: `UV ${weatherData.uv}` }
-            ]
-        });
+            // When new sport is selected clear tiles
+            clearTiles();
 
-        createTile({
-            rows: 1,
-            cols: 2,
-            content: [
-                { type: "text", value: `${weatherData.temperature}°C`},
-                { type: "chart", id: "chart_div" },
-            ]
-        });
-
+            console.log("here is weather data", weatherData);
+            // define tile types
+            let four_temp_cond_wind_uv = {
+                rows: 2,
+                cols: 2,
+                content: [
+                    { type: "text", value: `${weatherData.temperature}°C`},
+                    //{ type: "image", src: "/static/images/profile-pic.png" },
+                    { type: "icon", value: `${weatherData.condition}` },
+                    { type: "text", value: `${weatherData.wind}kph` },
+                    { type: "text", value: `UV ${weatherData.uv}` }
+                ]
+            }
+                
+            let two_temp_tempgraph = {
+                rows: 1,
+                cols: 2,
+                content: [
+                    { type: "text", value: `${weatherData.temperature}°C`},
+                    { type: "chart", id: "chart_div" },
+                ]
+            }
+            
+            // define what tiles are shown based on active sport.
+            const sportTilePresets = {
+                Running: [four_temp_cond_wind_uv, two_temp_tempgraph],
+                Cycling: [two_temp_tempgraph],
+                Swimming: []
+            }
+    
+            // collect tiles to render
+            activeSportTiles = sportTilePresets[selectedSport];
+    
+            activeSportTiles.forEach(tile => {
+                createTile(tile);
+            })
+        })
+        
         // Load the chart script and render the chart after tiles are created
         const script = document.createElement("script");
         script.src = "/static/js/temp-chart.js";
@@ -138,5 +177,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         };
         document.body.appendChild(script);
-});
-});
+    });
+
+
+        
+})    
