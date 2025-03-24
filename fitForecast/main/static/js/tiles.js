@@ -2,13 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("tileContainer");
     const addTileBtn = document.getElementById("addTile");
 
-
     // Check if elements exist to prevent errors
     if (!container || !addTileBtn) {
         console.error("Tile container or add tile button not found!");
         return;
     }
-        
+    
     // create each tile from json data
     function createTile(tileData) {
         console.log("Creating tile:", tileData); 
@@ -27,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 element = document.createElement("div");
                 element.classList.add("text-content");
                 element.textContent = item.value;
+            } else if (item.type === "headerText") {
+                element = document.createElement("h4");
+                element.classList.add("text-content");
+                element.textContent = item.value;
             } else if (item.type === "image") {
                 element = document.createElement("img");
                 element.src = item.src;
@@ -41,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 element.textContent = item.value; // Set the icon's name (e.g., "home", "star")
             }
             tile.appendChild(element);
+            return tile;
         });
 
         // container.appendChild(tile);
@@ -113,6 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("WeatherDataUpdatedTiles event triggered!");
         weatherData = event.detail;
         console.log("Weather data received:", weatherData); // Log weather data
+        // select first pill by default to generate tiles
+        sportsPills[0].click();
     });
 
     function clearTiles() {
@@ -143,21 +149,82 @@ document.addEventListener("DOMContentLoaded", function () {
                     { type: "text", value: `UV ${weatherData.uv}` }
                 ]
             }
-                
-            let two_temp_tempgraph = {
-                rows: 1,
+
+            // conditions now and later
+            let condition_now_later = {
+                rows: 2,
                 cols: 2,
                 content: [
-                    { type: "text", value: `${weatherData.temperature}°C`},
-                    { type: "chart", id: "chart_div" },
+                    { type: "headerText", value: 'Now'},
+                    { type: "headerText", value: 'Later'},
+                    { type: "icon", value: `${weatherData.condition}`},
+                    { type: "icon", value: `${weatherData.conditionLater}`}
                 ]
             }
             
+            // temperature now. High and low temps.
+            let temp_now_high_low = {
+                rows: 2,
+                cols: 3,
+                content: [
+                    {type: "headerText", value: 'Now'},
+                    {type: "headerText", value: 'High'},
+                    {type: "headerText", value: 'Low'},
+                    {type: "text", value: `${weatherData.temperature}°C`},
+                    {type: "text", value: `${weatherData.temperature+5}°C`},
+                    {type: "text", value: `${weatherData.temperature/2-6}°C`}
+                ]
+            }
+
+            // UV Right now and highest uv
+            let uv_now_high = {
+                rows: 2,
+                cols: 3,
+                content: [
+                    {type: "headerText", value: 'UV'},
+                    {type: "headerText", value: 'Now'},
+                    {type: "headerText", value: 'High'},
+                    {type: "headerText", value: 'Index'},
+                    {type: "text", value: `${weatherData.uv}`},
+                    {type: "text", value: `${weatherData.uv + 3}`},
+                ]
+            }
+            
+            // wind right now, high speed and low speed
+            let wind_now_high_low = {
+                rows: 2,
+                cols: 4,
+                content: [
+                    {type: "headerText", value: 'Wind'},
+                    {type: "headerText", value: 'Now'},
+                    {type: "headerText", value: 'High'},
+                    {type: "headerText", value: 'Low'},
+                    {type: "headerText", value: 'kph'},
+                    {type: "text", value: `${weatherData.wind}`},
+                    {type: "text", value: `${Math.max(weatherData.wind,weatherData.wind * 2 - 25)}`},
+                    {type: "text", value: `${Math.max(0, weatherData.wind - 13)}`}
+                ]
+            }
+
+            // sunrise and sunset times
+            let sunrise_sunset = {
+                rows: 2,
+                cols: 3,
+                content: [
+                    {type: "headerText", value: 'Daylight'},
+                    {type: "icon", value: 'wb_sunny'},
+                    {type: "icon", value: 'wb_twilight'},
+                    {type: "headerText", value: 'Hours'},
+                    {type: "text", value: '07:32'},
+                    {type: "text", value: '20:07'},
+                ]
+            }
+
             // define what tiles are shown based on active sport.
             const sportTilePresets = {
-                Running: [four_temp_cond_wind_uv, two_temp_tempgraph],
-                Cycling: [two_temp_tempgraph],
-                Swimming: []
+                Running: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                Cycling: [condition_now_later, wind_now_high_low],
+                Swimming: [condition_now_later, temp_now_high_low, sunrise_sunset]
             }
     
             // collect tiles to render

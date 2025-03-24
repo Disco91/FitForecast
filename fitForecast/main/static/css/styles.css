@@ -141,8 +141,10 @@
 .tile-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 15px;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Centers tiles horizontally */
+
 }
 
 .tile {
@@ -159,6 +161,10 @@
     transition: transform 0.3s ease, opacity 0.3s ease; /* Smoot` transition for swipe and opacity */
     cursor: pointer;
     user-select: none;
+}
+
+.tile-container .tile h4 {
+    font-weight: 100;
 }
 
 /* When a tile is swiped to be removed */
@@ -202,15 +208,6 @@
 .add-tile-button:hover {
     background-color: lightgrey; /* Darker shade on hover */
     transform: scale(1.1); /* Slight zoom effect */
-}
-
-/* Ensure the button stays below the tiles */
-.tile-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center; /* Centers tiles horizontally */
 }
 
 /* Adjust the button to be centered below tiles */
@@ -267,8 +264,8 @@
 
 .text-content {
     margin: 0;
-    font-size: 2rem;  /* Adjust font size as needed */
-    font-weight: 500;   /* Adjust font weight */
+    font-size: 1.5rem;  /* Adjust font size as needed */
+    font-weight: 600;   /* Adjust font weight */
     text-align: center; /* Center the text */
     display: flex;
     justify-content: center; /* Horizontally center */

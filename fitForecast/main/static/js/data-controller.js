@@ -2,6 +2,7 @@ let temperature = -99;
 let wind = -99;
 let uv = -99;
 let condition = "sunny";
+let conditionLater = "sunny";
 
 // using python random function return random weather data
 function fetchWeatherData() {
@@ -14,9 +15,10 @@ function fetchWeatherData() {
             wind = data.wind;
             uv = data.uv;
             condition = data.condition;
+            conditionLater = data.conditionLater;
 
             // After retrieving weather data, update index
-            const result = walk_index(temperature, wind, uv, condition);
+            const result = walk_index(temperature, wind, uv, condition, conditionLater);
             document.getElementById("result").textContent = result;
             
             // after index is updated activate the smart index script.
@@ -24,7 +26,7 @@ function fetchWeatherData() {
             document.dispatchEvent(event)
 
             // prepare data to tiles.js
-            const eventTiles = new CustomEvent("WeatherDataUpdatedTiles",{ detail: { temperature, wind, uv, condition, result }});
+            const eventTiles = new CustomEvent("WeatherDataUpdatedTiles",{ detail: { temperature, wind, uv, condition, conditionLater, result }});
             document.dispatchEvent(eventTiles)
 })};
 
