@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // create each tile from json data
     function createTile(tileData) {
-        console.log("Creating tile:", tileData); 
+        //console.log("Creating tile:", tileData); 
         const tile = document.createElement("div");
         tile.classList.add("tile");
         
@@ -33,11 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (item.type === "image") {
                 element = document.createElement("img");
                 element.src = item.src;
-            } else if (item.type === "chart") {
-                element = document.createElement("div");
-                element.id = item.id;
-                element.style.width = "100%";
-                element.style.height = "100%";
             } else if (item.type === "icon") {
                 element = document.createElement("div"); // Create an <i> element for the icon
                 element.classList.add("material-symbols-outlined", "grid-icon"); // Add the Material Icons class
@@ -114,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let weatherData = {};
 
     document.addEventListener("WeatherDataUpdatedTiles", function(event) {
-        console.log("WeatherDataUpdatedTiles event triggered!");
+        // console.log("WeatherDataUpdatedTiles event triggered!");
         weatherData = event.detail;
         console.log("Weather data received:", weatherData); // Log weather data
         // select first pill by default to generate tiles
@@ -136,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // When new sport is selected clear tiles
             clearTiles();
 
-            console.log("here is weather data", weatherData);
             // define tile types
             let four_temp_cond_wind_uv = {
                 rows: 2,
@@ -152,12 +146,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // conditions now and later
             let condition_now_later = {
-                rows: 2,
-                cols: 2,
+                rows: 1,
+                cols: 4,
                 content: [
                     { type: "headerText", value: 'Now'},
-                    { type: "headerText", value: 'Later'},
                     { type: "icon", value: `${weatherData.condition}`},
+                    { type: "headerText", value: 'Later'},
                     { type: "icon", value: `${weatherData.conditionLater}`}
                 ]
             }
@@ -234,16 +228,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 createTile(tile);
             })
         })
-        
-        // Load the chart script and render the chart after tiles are created
-        const script = document.createElement("script");
-        script.src = "/static/js/temp-chart.js";
-        script.onload = function() {
-            google.charts.setOnLoadCallback(function () {
-                drawChart("chart_div"); // Pass the ID of the div where the chart will be drawn
-            });
-        };
-        document.body.appendChild(script);
     });
 
 

@@ -10,7 +10,7 @@ def generate_weather():
     wind = random.randint(0,100)
     uv = random.randint(0,11)
 
-    conditions = ["sunny", "cloud", "rainy", "partly_cloudy_day"]
+    conditions = ["sunny", "cloud", "rainy", "partly_cloudy_day", "thunderstorm"]
 
     condition = random.choice(conditions)
     conditionLater = random.choice(conditions)

@@ -14,9 +14,9 @@ function animateGauge(value) {
 
     // Animate stroke
     path.style.transition = "stroke-dashoffset 1.5s ease-in-out";
-    path.style.strokeDashoffset = length * (1 - value / 100) + 5;
+    path.style.strokeDashoffset = length * (1 - value / 100);
     grey_path.style.transition = "stroke-dashoffset 1.5s ease-in-out";
-    grey_path.style.strokeDashoffset = (length * (1 - value / 100)) - length - 5;
+    grey_path.style.strokeDashoffset = (length * (1 - value / 100)) - length;
 }   
 
 function retrieveColor(index) {
@@ -36,9 +36,11 @@ function retrieveColor(index) {
 // Ensure the path starts hidden when page loads
 document.addEventListener("WeatherDataUpdated", function(event) {
     
-    let value = document.getElementById("result").textContent;
+    let inValue = parseFloat(document.getElementById("result").textContent);
+    // ensure animation doesnt break by going less than 1 or greater than 100
+    let clampedValue = Math.min(100, Math.max(1, inValue));
 
-    document.getElementById("gauge-fill").setAttribute("stroke", retrieveColor(value));
-
-    animateGauge(value);
+    // set color of gauge fill and animate
+    document.getElementById("gauge-fill").setAttribute("stroke", retrieveColor(clampedValue));
+    animateGauge(clampedValue);
 });
