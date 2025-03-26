@@ -76,7 +76,7 @@
     cursor: pointer;
     user-select: none;
     transition: background 0.3s ease-in-out;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 /* When a pill is selected */
@@ -88,7 +88,7 @@
 }
 
 .sport:hover {
-    opacity: .6;
+    opacity: 1;
 }
 
 /* Main Content */
