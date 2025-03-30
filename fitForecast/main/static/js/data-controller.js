@@ -41,6 +41,7 @@ function fetchWeatherData() {
 
             // default to first item which is running, *improvement would be to return first pill regardless.
             document.getElementById("result").textContent = runScore;
+            document.getElementById("result_text").textContent = returnMessage(runScore);
 
             //Colourise pills based off smart index score
             updatePillColor("run-pill", runScore);
@@ -89,12 +90,31 @@ const sportsPills = document.querySelectorAll('.sport');
             }
 
             document.getElementById("result").textContent = index;
+            document.getElementById("result_text").textContent = returnMessage(index);
 
             const event = new CustomEvent("WeatherDataUpdated",{ detail: {result: result}});
             document.dispatchEvent(event)
 
         })
     });
+
+function returnMessage(score) {
+    if (score == 0) {
+        return "Not recommended!";
+    } else if (score <= 25) {
+        return "Not ideal conditions today";
+    } else if (score <= 40) {
+        return "Not ideal conditions today";
+    } else if (score <= 60) {
+        return "Worth a try!";
+    } else if (score < 100) {
+        return "Great Conditions!";
+    } else if (score == 100) {
+        return "Does not get better!";
+    } else {
+        return "";
+    }
+}
 
 function updatePillColor(elementId, score) {
     const pill = document.getElementById(elementId);
