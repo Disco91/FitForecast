@@ -6,8 +6,8 @@ def home(request):
     return render(request, 'home.html')
 
 def generate_weather():
-    temperature = random.randint(-30,50)
-    wind = random.randint(0,100)
+    temperature = random.randint(-10,50)
+    wind = random.randint(0,50)
     uv = random.randint(0,11)
 
     conditions = ["sunny", "cloud", "rainy", "partly_cloudy_day", "thunderstorm"]

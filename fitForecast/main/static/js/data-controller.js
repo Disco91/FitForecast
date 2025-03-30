@@ -5,6 +5,10 @@ let uv = -99;
 let condition = "sunny";
 let conditionLater = "sunny";
 
+let runScore = -99;
+let cycleScore = -99;
+let swimScore = -99;
+
 // using python random function return random weather data
 function fetchWeatherData() {
     fetch('/weather/')
@@ -20,12 +24,11 @@ function fetchWeatherData() {
             weatherDataDict = data;
 
             // After retrieving weather data, update index
-            const runScore = run_index(weatherDataDict);
-            const cycleScore = cycling_index(weatherDataDict);
-            const swimScore = swim_index(weatherDataDict);
+            runScore = run_index(weatherDataDict);
+            cycleScore = cycling_index(weatherDataDict);
+            swimScore = swim_index(weatherDataDict);
             document.getElementById("result").textContent = runScore;
 
-            console.log("record: " +[runScore,cycleScore,swimScore]);
             //Colourise pills based off smart index score
             updatePillColor("run-pill", runScore);
             updatePillColor("cycle-pill", cycleScore);
@@ -41,6 +44,29 @@ function fetchWeatherData() {
             
             console.log("Fetched Data2:", weatherDataDict);
 })};
+
+const sportsPills = document.querySelectorAll('.sport');
+    sportsPills.forEach(pill => {
+        pill.addEventListener("click", function() {
+            // console.log("Pill is: " + pill.id)
+            let index = null; 
+
+            // determine what score to use based on selected pill.
+            if (pill.id === "run-pill"){
+                index = runScore;
+            } else if (pill.id === "cycle-pill") {
+                index = cycleScore;
+            } else if (pill.id === "swim-pill") {
+                index = swimScore;
+            }
+
+            document.getElementById("result").textContent = index;
+
+            const event = new CustomEvent("WeatherDataUpdated",{ detail: {result: result}});
+            document.dispatchEvent(event)
+
+        })
+    });
 
 function updatePillColor(elementId, score) {
     const pill = document.getElementById(elementId);
@@ -83,11 +109,11 @@ function favourable_condition_score(condition) {
     conditons = ["sunny", "cloud", "rainy", "partly_cloudy_day", "thunderstorm"];
 
     const scores = {
-        sunny: 20,
-        cloud: 20,
-        rainy: -20,
+        sunny: 30,
+        cloud: 30,
+        rainy: -10,
         thunderstorm: -50,
-        partly_cloudy_day: 20,
+        partly_cloudy_day: 50,
     };
 
     return scores[condition] ?? 0; // Return 0 if condition is not in scores
@@ -144,12 +170,12 @@ function calc_index_score(weatherData, temperatureRange, temperatureDangerRange,
         index = 0;
     }
 
-    console.log("condtion_score: " + condition_score);
-    console.log("temp_score: " + temp_score);
-    console.log("wind_score: " + wind_score);
-    console.log("uv_score: " + uv_score);
+    //console.log("condtion_score: " + condition_score);
+    //console.log("temp_score: " + temp_score);
+    //console.log("wind_score: " + wind_score);
+    //console.log("uv_score: " + uv_score);
 
-    console.log("index: " + index);
+    //console.log("index: " + index);
 
     // apply upper limit of 100 and lower limit of 0. Round to nearest whole number. return value.
     return Math.round(Math.min(100,Math.max(0,index)));
@@ -165,7 +191,7 @@ function run_index(weatherDataDict) {
     const danger_wind_limit = 50; // max and min temps before score is set to 0
     const uv_range = [0, 7]; // optimum UV Range
 
-    // calculate running Index
+    // calculate Index
     let runIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
@@ -175,13 +201,13 @@ function run_index(weatherDataDict) {
 
 // calculate the Cycling_index score
 function cycling_index(weatherDataDict) {
-    const temp_range = [10,25]; // optimum temperature range
+    const temp_range = [5,30]; // optimum temperature range
     const danger_temp_range = [0, 50]; // max and min temps before score is set to 0
     const wind_range = [0, 20]; // optimum wind range
     const danger_wind_limit = 40; // max and min temps before score is set to 0
     const uv_range = [0, 7]; // optimum UV Range
 
-    // calculate cycling Index
+    // calculate Index
     let cycleIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
@@ -197,7 +223,7 @@ function swim_index(weatherDataDict) {
     const danger_wind_limit = 60; // max and min temps before score is set to 0
     const uv_range = [0, 5]; // optimum UV Range
 
-    // calculate cycling Index
+    // calculate Index
     let swimIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
