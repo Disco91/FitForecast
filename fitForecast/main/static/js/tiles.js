@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 Gym: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Surf: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 SUP: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
-                Dragon_Boat: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low]
+                Dragonboat: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low]
             }
     
             // collect tiles to render

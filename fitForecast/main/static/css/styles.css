@@ -42,11 +42,10 @@
     white-space: nowrap;
     display: flex;
     position: fixed;
-    top: 55px; /* Just below the top bar */
+    top: 55px;
     left: 0;
     width: 100%;
     z-index: 999;
-    scrollbar-width: none; /* Hides scrollbar in Firefox */
 }
 
 /* Hide scrollbar for WebKit browsers */
@@ -111,8 +110,8 @@
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px; /* Set width */
-    height: 30px; /* Set height */
+    width: 30px;
+    height: 30px;
     border-radius: 50%; /* Make it circular */
     object-fit: cover; /* Ensures the image fills the circle without distortion */
 
@@ -124,31 +123,28 @@
     left: 10px;
     top: 50%;
     transform: translateY(-40%);
-    width: 30px; /* Set width */
-    height: 30px; /* Set height */
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 200,
-    'GRAD' 0,
-    'opsz' 24
+    width: 30px;
+    height: 30px;
 }
 
 /* tile icons */
 .tile .material-symbols-outlined {
     font-size: 2.5rem;
-    width: 40px; /* Set width */
-    height: 40px; /* Set height */
-    transform: translateY(30%);
+    position:center;
+    width: 40px;
+    height: 40px;
 }
 
 .grid-icon {
     position: static;  /* Reset position to default */
     transform: none;   /* Reset transform */
-    width: auto;       /* Allow icon to adjust size based on content */
-    height: auto;      /* Allow icon to adjust size based on content */
-    font-size: 40px;   /* Larger icon size inside the grid */
-    text-align: center;  /* Center the icon inside the div */
-    padding: 0;          /* Remove extra padding if you want the icon to fit better */
+    width: auto;       
+    height: auto;      
+    font-size: 40px;   
+    text-align: center; 
+    padding: 0;          
+    justify-self: center; 
+    align-self: center;
 }
 
 .tile-container {
@@ -156,7 +152,7 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
-    justify-content: center; /* Centers tiles horizontally */
+    justify-content: center;
 
 }
 
@@ -207,14 +203,15 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, background 0.3s ease-in-out;
     position: relative;        /* Keeps the button inside the container */
-    margin-top: 10px;          /* Space between tiles and button */
+    margin-top: 0px;          /* Space between tiles and button */
 } /* chatgpt used to find lists of styles to apply */
 
 /* Ensure the Material icon is properly centered */
 .add-tile-button .material-symbols-outlined {
-    font-size: 45px;           /* Adjust the icon size if necessary */
+    font-size: 65px;           /* Adjust the icon size if necessary */
     display: inline-block;     /* Ensures the icon is treated as an inline element */
-    transform: translateY(-22px); 
+    transform: translateY(0); 
+    font-weight: 100;
 }
 
 /* Hover effect */
