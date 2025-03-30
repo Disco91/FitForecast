@@ -218,7 +218,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const sportTilePresets = {
                 Running: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Cycling: [condition_now_later, wind_now_high_low],
-                Swimming: [condition_now_later, temp_now_high_low, sunrise_sunset]
+                Swimming: [condition_now_later, temp_now_high_low, sunrise_sunset],
+                Yoga: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                Gym: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                Surf: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                SUP: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                Dragon_Boat: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low]
             }
     
             // collect tiles to render

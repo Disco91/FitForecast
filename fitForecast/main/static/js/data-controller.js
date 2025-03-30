@@ -5,9 +5,15 @@ let uv = -99;
 let condition = "sunny";
 let conditionLater = "sunny";
 
+// default scores created
 let runScore = -99;
 let cycleScore = -99;
 let swimScore = -99;
+let yogaScore = -99;
+let gymScore = -99;
+let surfScore = -99;
+let supScore = -99;
+let dragonboatScore = -99;
 
 // using python random function return random weather data
 function fetchWeatherData() {
@@ -27,12 +33,24 @@ function fetchWeatherData() {
             runScore = run_index(weatherDataDict);
             cycleScore = cycling_index(weatherDataDict);
             swimScore = swim_index(weatherDataDict);
+            yogaScore = yoga_index(weatherDataDict);
+            gymScore = gym_index(weatherDataDict);
+            surfScore = surf_index(weatherDataDict);
+            supScore = sup_index(weatherDataDict);
+            dragonboatScore = dragonboat_index(weatherDataDict);
+
+            // default to first item which is running, *improvement would be to return first pill regardless.
             document.getElementById("result").textContent = runScore;
 
             //Colourise pills based off smart index score
             updatePillColor("run-pill", runScore);
             updatePillColor("cycle-pill", cycleScore);
             updatePillColor("swim-pill", swimScore);
+            updatePillColor("yoga-pill", yogaScore);
+            updatePillColor("gym-pill", gymScore);
+            updatePillColor("surf-pill", surfScore);
+            updatePillColor("sup-pill", supScore);
+            updatePillColor("dragonboat-pill", dragonboatScore);
             
             // after index is updated activate the smart index script.
             const event = new CustomEvent("WeatherDataUpdated",{ detail: {result: result}});
@@ -58,6 +76,16 @@ const sportsPills = document.querySelectorAll('.sport');
                 index = cycleScore;
             } else if (pill.id === "swim-pill") {
                 index = swimScore;
+            } else if (pill.id === "yoga-pill") {
+                index = yogaScore;
+            } else if (pill.id === "gym-pill") {
+                index = gymScore;
+            } else if (pill.id === "surf-pill") {
+                index = surfScore;
+            } else if (pill.id === "sup-pill") {
+                index = supScore;
+            } else if (pill.id === "dragonboat-pill") {
+                index = dragonboatScore;
             }
 
             document.getElementById("result").textContent = index;
@@ -74,14 +102,17 @@ function updatePillColor(elementId, score) {
         console.error(`Element with id "${elementId}" not found.`);
         return;
     }
-    if (score >= 70) {
-        pill.style.backgroundColor = "#4CAF50"; // Green
-    } else if (score >= 40) {
-        pill.style.backgroundColor = "#FFC107"; // Amber
-    } else if (score >= 0) {
-        pill.style.backgroundColor = "#F44336"; // Red
+    console.log("pillid: " + pill.id + " - " + score)
+    if (score <= 25) {
+        pill.style.backgroundColor =  "red";
+    } else if (score <= 40) {
+        pill.style.backgroundColor =  "orange";
+    } else if (score <= 60) {
+        pill.style.backgroundColor =  "yellow";
+    } else if (score <= 80) {
+        pill.style.backgroundColor =  "#32CD32"; // lime green
     } else {
-        pill.style.backgroundColor = "#9E9E9E"; // Grey
+        pill.style.backgroundColor =  "green";
     }
 }
 
@@ -141,10 +172,10 @@ function calc_index_score(weatherData, temperatureRange, temperatureDangerRange,
     let condition_score = 0;
 
     // calc temperature score
-    calc_range_scores(weatherData.temperature, temperatureRange, 30);
+    temp_score = calc_range_scores(weatherData.temperature, temperatureRange, 30);
 
     // calc wind score
-    calc_range_scores(weatherData.wind, temperatureRange, 30);
+    wind_score = calc_range_scores(weatherData.wind, temperatureRange, 30);
 
     // calc uv score. If uv is higher than upper range return negative score. If UV is within recomended range return positive score.
     if (uvRange[1] < weatherData.uv) {
@@ -192,11 +223,11 @@ function run_index(weatherDataDict) {
     const uv_range = [0, 7]; // optimum UV Range
 
     // calculate Index
-    let runIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
-    console.log("run Index: " + runIndex);
-    return runIndex;
+    console.log("run Index: " + index);
+    return index;
 }
 
 // calculate the Cycling_index score
@@ -208,11 +239,11 @@ function cycling_index(weatherDataDict) {
     const uv_range = [0, 7]; // optimum UV Range
 
     // calculate Index
-    let cycleIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+    let Index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
-    console.log("cycle Index: " + cycleIndex);
-    return cycleIndex;
+    console.log("cycle Index: " + Index);
+    return Index;
 }
 
 // calculate the swimming_index score
@@ -224,11 +255,91 @@ function swim_index(weatherDataDict) {
     const uv_range = [0, 5]; // optimum UV Range
 
     // calculate Index
-    let swimIndex = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
          wind_range, danger_wind_limit, uv_range);
 
-    console.log("swim Index: " + swimIndex);
-    return swimIndex;
+    console.log("swim Index: " + index);
+    return index;
+}
+
+// calculate the yoga_index score
+function yoga_index(weatherDataDict) {
+    const temp_range = [-999,999]; // optimum temperature range
+    const danger_temp_range = [-999, 999]; // max and min temps before score is set to 0
+    const wind_range = [-999, 999]; // optimum wind range
+    const danger_wind_limit = 999; // max and min temps before score is set to 0
+    const uv_range = [0, 99]; // optimum UV Range
+
+    // calculate Index
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+         wind_range, danger_wind_limit, uv_range);
+
+    console.log("yoga Index: " + index);
+    return index;
+}
+
+// calculate the swimming_index score
+function gym_index(weatherDataDict) {
+    const temp_range = [-999,999]; // optimum temperature range
+    const danger_temp_range = [-999, 999]; // max and min temps before score is set to 0
+    const wind_range = [-999, 999]; // optimum wind range
+    const danger_wind_limit = 999; // max and min temps before score is set to 0
+    const uv_range = [0, 99]; // optimum UV Range
+
+    // calculate Index
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+         wind_range, danger_wind_limit, uv_range);
+
+    console.log("gym Index: " + index);
+    return index;
+}
+
+// calculate the swimming_index score
+function surf_index(weatherDataDict) {
+    const temp_range = [15,40]; // optimum temperature range
+    const danger_temp_range = [5, 60]; // max and min temps before score is set to 0
+    const wind_range = [0, 20]; // optimum wind range
+    const danger_wind_limit = 60; // max and min temps before score is set to 0
+    const uv_range = [0, 5]; // optimum UV Range
+
+    // calculate Index
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+         wind_range, danger_wind_limit, uv_range);
+
+    console.log("surf Index: " + index);
+    return index;
+}
+
+// calculate the swimming_index score
+function sup_index(weatherDataDict) {
+    const temp_range = [20,40]; // optimum temperature range
+    const danger_temp_range = [5, 60]; // max and min temps before score is set to 0
+    const wind_range = [0, 10]; // optimum wind range
+    const danger_wind_limit = 30; // max and min temps before score is set to 0
+    const uv_range = [0, 5]; // optimum UV Range
+
+    // calculate Index
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+         wind_range, danger_wind_limit, uv_range);
+
+    console.log("sup Index: " + index);
+    return index;
+}
+
+// calculate the dragonboat_index score
+function dragonboat_index(weatherDataDict) {
+    const temp_range = [5,35]; // optimum temperature range
+    const danger_temp_range = [-5, 60]; // max and min temps before score is set to 0
+    const wind_range = [0, 30]; // optimum wind range
+    const danger_wind_limit = 50; // max and min temps before score is set to 0
+    const uv_range = [0, 7]; // optimum UV Range
+
+    // calculate Index
+    let index = calc_index_score(weatherDataDict, temp_range, danger_temp_range,
+         wind_range, danger_wind_limit, uv_range);
+
+    console.log("dragonboat Index: " + index);
+    return index;
 }
 
 // update the fields in HTML with the results
