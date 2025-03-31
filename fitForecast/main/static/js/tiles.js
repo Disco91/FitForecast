@@ -210,7 +210,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     {type: "icon", value: 'wb_twilight'},
                     {type: "headerText", value: 'Hours'},
                     {type: "text", value: '07:32'},
-                    {type: "text", value: '20:07'},
+                    {type: "text", value: '20:07'}
+                ]
+            }
+
+            // wave height and period
+            let wave_height_period = {
+                rows: 3,
+                cols: 2,
+                content: [
+                    {type: "icon", value: 'tsunami'},
+                    {type: "icon", value: 'waves'},
+                    {type: "headerText", value: 'Height'},
+                    {type: "headerText", value: 'Period'},
+                    {type: "text", value: '4-5ft'},
+                    {type: "text", value: '11s'}
                 ]
             }
 
@@ -218,10 +232,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const sportTilePresets = {
                 Running: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Cycling: [condition_now_later, wind_now_high_low],
-                Swimming: [condition_now_later, temp_now_high_low, sunrise_sunset],
+                Swimming: [condition_now_later, temp_now_high_low, uv_now_high, sunrise_sunset, wave_height_period],
                 Yoga: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Gym: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
-                Surf: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
+                Surf: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low, wave_height_period],
                 SUP: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Dragonboat: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low]
             }

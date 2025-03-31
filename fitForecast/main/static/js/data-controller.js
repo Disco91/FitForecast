@@ -101,8 +101,6 @@ const sportsPills = document.querySelectorAll('.sport');
 function returnMessage(score) {
     if (score == 0) {
         return "Not recommended!";
-    } else if (score <= 25) {
-        return "Not ideal conditions today";
     } else if (score <= 40) {
         return "Not ideal conditions today";
     } else if (score <= 60) {
