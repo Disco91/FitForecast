@@ -124,33 +124,13 @@ function updatePillColor(elementId, score) {
     if (score <= 25) {
         pill.style.backgroundColor =  "red";
     } else if (score <= 40) {
-        pill.style.backgroundColor =  "orange";
+        pill.style.backgroundColor =  "#e67e22";
     } else if (score <= 60) {
-        pill.style.backgroundColor =  "yellow";
+        pill.style.backgroundColor =  "#FFBF00";
     } else if (score <= 80) {
         pill.style.backgroundColor =  "#32CD32"; // lime green
     } else {
         pill.style.backgroundColor =  "green";
-    }
-}
-
-// function to linearly score the value from 0 - 1
-function normalize(value, range) {
-    const [min, max] = range;
-    return Math.max(0, Math.min(1, (value - min) / (max - min)));
-}
-
-// Function to calculate temperature score with penalty for out-of-range values
-function temperature_score(value, range) {
-    const [min, max] = range;
-    const mid = (min + max) / 2; // Ideal middle point
-
-    if (value < min) {
-        return normalize(value, [min - 10, min]); // Penalize lower temps
-    } else if (value > max) {
-        return normalize(value, [max, max + 10]); // Penalize higher temps
-    } else {
-        return 1 - Math.abs((value - mid) / (max - min) * 2); // Best score at mid, decreases outward
     }
 }
 
@@ -181,7 +161,7 @@ function calc_range_scores(value, range, idealScore) {
     return calc_score;
 }
 
-function calc_index_score(weatherData, temperatureRange, temperatureDangerRange, windRange, windDangerLimit, uvRange) {
+function calc_index_score(weatherData, temperatureRange, temperatureDangerRange, windDangerLimit, uvRange) {
     
     // declare empty scores for calculating final index
     let temp_score = 0;

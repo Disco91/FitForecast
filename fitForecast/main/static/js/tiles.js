@@ -94,20 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
         container.appendChild(tile); // Append the tile to the container
     }
 
-    // ADD TILE BUTTON FUNCTIONALITY
-    //addTileBtn.addEventListener("click", function () {
-    //    createTile(`Tile ${container.children.length + 1}`);
-    //});
 
-    // Example initial tiles
-    // createTile("Tile 1");
-    // createTile("Tile 2");
-
-
-
-    // collect weather data
     let weatherData = {};
-
+    // collect weather data from views.py
     document.addEventListener("WeatherDataUpdatedTiles", function(event) {
         // console.log("WeatherDataUpdatedTiles event triggered!");
         weatherData = event.detail;
@@ -116,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sportsPills[0].click();
     });
 
+    // remove tiles function required to empty tile list before moving to another sport.
     function clearTiles() {
         while (container.firstChild) {
             container.removeChild(container.firstChild);
@@ -132,20 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
             clearTiles();
 
             // define tile types
-            let four_temp_cond_wind_uv = {
-                rows: 2,
-                cols: 2,
-                content: [
-                    { type: "text", value: `${weatherData.temperature}°C`},
-                    //{ type: "image", src: "/static/images/profile-pic.png" },
-                    { type: "icon", value: `${weatherData.condition}` },
-                    { type: "text", value: `${weatherData.wind}kph` },
-                    { type: "text", value: `UV ${weatherData.uv}` }
-                ]
-            }
-
             // conditions now and later
-            let condition_now_later = {
+            const condition_now_later = {
                 rows: 1,
                 cols: 4,
                 content: [
@@ -157,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             
             // temperature now. High and low temps.
-            let temp_now_high_low = {
+            const temp_now_high_low = {
                 rows: 2,
                 cols: 3,
                 content: [
@@ -171,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // UV Right now and highest uv
-            let uv_now_high = {
+            const uv_now_high = {
                 rows: 2,
                 cols: 3,
                 content: [
@@ -185,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             
             // wind right now, high speed and low speed
-            let wind_now_high_low = {
+            const wind_now_high_low = {
                 rows: 2,
                 cols: 4,
                 content: [
@@ -201,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // sunrise and sunset times
-            let sunrise_sunset = {
+            const sunrise_sunset = {
                 rows: 2,
                 cols: 3,
                 content: [
@@ -215,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // wave height and period
-            let wave_height_period = {
+            const wave_height_period = {
                 rows: 3,
                 cols: 2,
                 content: [
@@ -231,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // define what tiles are shown based on active sport.
             const sportTilePresets = {
                 Running: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
-                Cycling: [condition_now_later, wind_now_high_low],
+                Cycling: [condition_now_later, temp_now_high_low, wind_now_high_low],
                 Swimming: [condition_now_later, temp_now_high_low, uv_now_high, sunrise_sunset, wave_height_period],
                 Yoga: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
                 Gym: [condition_now_later, temp_now_high_low, uv_now_high, wind_now_high_low],
