@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("tileContainer");
-    const addTileBtn = document.getElementById("addTile");
 
     // Check if elements exist to prevent errors
-    if (!container || !addTileBtn) {
+    if (!container) {
         console.error("Tile container or add tile button not found!");
         return;
     }
@@ -42,9 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return tile;
         });
 
-        // container.appendChild(tile);
-
-        // SWIPE FUNCTIONALITY (FOR TOUCH AND MOUSE)
+        // SWIPE FUNCTIONALITY TO REMOVE TILES (FOR TOUCH AND MOUSE)
         let startX = 0;
         let endX = 0;
 

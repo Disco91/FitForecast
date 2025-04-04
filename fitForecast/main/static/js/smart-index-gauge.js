@@ -1,14 +1,17 @@
+// Developed from similar gauge found on https://codepen.io/andygongea/pen/LyVwEP
 function animateGauge(value) {
     let path = document.getElementById("gauge-fill");
     let grey_path = document.getElementById("grey-gauge-fill")
     let length = path.getTotalLength(); // Get total path length
 
+    // set the position of the coloured path
     path.style.strokeDasharray = length; // Full path visible
     path.style.strokeDashoffset = length; // Hide it initially
-    grey_path.style.strokeDasharray = length; // Full path visible
-    grey_path.style.strokeDashoffset = 0; // Hide it initially
+    // set the position of the grey background path 
+    grey_path.style.strokeDasharray = length;
+    grey_path.style.strokeDashoffset = 0; 
 
-    // Force a reflow (required for animation to work)
+    // Force a reflow (required for animation to work) ChatGPT provided this while trying to debug.
     path.getBoundingClientRect();
     grey_path.getBoundingClientRect();
 
@@ -19,6 +22,7 @@ function animateGauge(value) {
     grey_path.style.strokeDashoffset = (length * (1 - value / 100)) - length;
 }   
 
+// set colors for scores
 function retrieveColor(index) {
     if (index <= 25) {
         return "red";

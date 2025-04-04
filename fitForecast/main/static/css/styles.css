@@ -26,7 +26,7 @@
 
 /* Style the first three letters of fitforecast */
 .first-three {
-    font-weight: 600; /* Regular weight */
+    font-weight: 600; /* bold weight */
 }
 
 /* Style the rest of fitforecast (extra light) */
@@ -182,53 +182,12 @@
     opacity: 0.5;  /* Makes tile semi-transparent while dragging */
 }
 
-/* Style the add-tile button */
-.add-tile-button {
-    display: flex;
-    justify-content: center;   /* Centers the icon horizontally */
-    align-items: center;       /* Centers the icon vertically */
-    width: 65px;               /* Adjust size */
-    height: 65px;              /* Make it a perfect circle */
-    background-color: white;   /* Button color */
-    border: none;
-    border-radius: 50%;        /* Makes it circular */
-    font-size: 30px;           /* Size of the icon */
-    color: black;
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, background 0.3s ease-in-out;
-    position: relative;        /* Keeps the button inside the container */
-    margin-top: 0px;          /* Space between tiles and button */
-} /* chatgpt used to find lists of styles to apply */
-
-/* Ensure the Material icon is properly centered */
-.add-tile-button .material-symbols-outlined {
-    font-size: 65px;           /* Adjust the icon size if necessary */
-    display: inline-block;     /* Ensures the icon is treated as an inline element */
-    transform: translateY(0); 
-    font-weight: 100;
-}
-
-/* Hover effect */
-.add-tile-button:hover {
-    background-color: lightgrey; /* Darker shade on hover */
-    transform: scale(1.1); /* Slight zoom effect */
-}
-
-/* Adjust the button to be centered below tiles */
-#addTile {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: "Inter", sans-serif;  /* Adjust font if needed */
-}
-
 .smart-index-container {
     display: flex;
     flex-direction: column;  /* Stack the elements vertically */
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Add space between elements */
+    gap: 0px; /* Add space between elements */
     padding: 20px;
     background-color: #ffffff !important;
     border-radius: 12px;
@@ -283,8 +242,3 @@
     max-height: 50%;    /* Limit the image height to the height of the grid cell */
     object-fit: cover;   /* Ensure the image fills the grid cell without distortion */
 }
-
-#chart_div {
-    height: 100%;
-}
-

@@ -36,10 +36,12 @@ Notion I used at the project start to plan out my design and breakdown the proje
 #### **GitHub**
 Using Github I created regular backups of my project at key milestones. I figured learning to use github would be criitical for any future collaboration with others. See here for link - https://github.com/Disco91/FitForecast
 
+I learned how to push commits to my project, how to role back changes to a previous version and how to inspect past versions through VSCODE.
+
 #### **Django**
 Django was used to build the website application. Simply running 'django-admin startproject fitForecast setup' the folders and files required to run a basic HTML server. This could then be previewed in a web browser while developing the program on the side. It took some research and assistance from ChatGPT to understand all the different files that are created.
 
-To test usability on different devices I deployed the site onto my Wifi IP address to allow me to use the website on my mobile phone. Alongside the Google Chrome inspect this allowed me to refine the UX design of the project.
+To test usability on different devices I deployed the site onto my device IP address to allow me to use the website on my mobile phone through the wifi. Alongside the Google Chrome inspect this allowed me to refine the UX design of the project and ensure a smooth user experience.
 
 #### **CSS**
 CSS was large part of this project, I wanted to ensure the webpage looked appealing and was particually representative of an App you would find on your phone. CSS is used in this project to stylise all my HTML code including that what was generated from javascript.
@@ -48,7 +50,7 @@ I paid alot of attention to ensure my design was compatible with all sizes and s
 #### **JavaScript**
 JavaScript was used to control much of the interactivity of the site. It was used to create the following effects: 
 - The sliding effect of 'sports pills' and 'tiles (tiles.js) 
-- Animate the 'smart index' gauge. It was used to. (smart-index-gauge.js)
+- Animate the 'smart index' gauge. (smart-index-gauge.js)
 - Calculate the different sports index scores based on weather and optimum conditions (data-controller.js)
 - Colourise the pills and smart index based on score (Select-pill.js)
 
@@ -59,8 +61,6 @@ Python was mostly provided by the Django environment on this project. However I 
 At the start of this project I set out to build a website that could provide quick glance metrics to allow user to decide what sport was best to do on that day. I believe the design choices I made through using tools such as Figma to create an appealing layout and the simplicity of the metrics shown have achieved that goal. 
 
 Instead of generating random weather data I would have considered implementing a real API call to return real world data based on any location. After researching I decided against this purely due to the limitations on amount of API calls that can be made and the possibility of being charged per call. An improvement could have been to implement a json format that would be compatible format with an API call so the dummy data could be easily switched out. For the scope of this project I decided not to pursue this idea.
-
-A login page and register page was attempted but I found the Django setup process and documentation around this very confusing as well as trying to implement a SQLite database there was already enough challenges to overcome with the current project and I decided to put this aside to focus on the core functionality.
 
 In summary I am proud of the product I produced, it functions well and with a bit more effort and time allowed I believe it could become a very useful tool to many people. I may well return to this one day to do just that. I feel alot more confident with developing websites and has boosted my skills within the Javascript environment.
 
